@@ -1,0 +1,40 @@
+The run_analysis.R script performs the 5 steps required in the course project's description. 
+Here are the details about these setps as well as all the variables and summaries calculated, along with units, and any other relevant information. 
+
+Preliminary setps: 
+  - Dataset downloaded and unziped in folder called UCI HAR Dataset
+  - Assign each data to variables:
+      - features : The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ.
+      - activites : list of the activities and their associated class (code)
+      - subject_test : contains subject identification that perform the activity in test group
+      - subject_train : contains subject identification that perform the activity in train group
+      - X_test : contains recorded features test data
+      - X_train : contains recorded features train data
+      - y_test : contains associated activity class for test data 
+      - y_train : contains associated activity class for train data
+      
+1. Merge the training and test sets to create one data set: 
+test is created by merging subject_test, y_test and X_test using cbind()
+train is created by merging subject_train, y_train and X_train using cbind()
+combined data table is created by merging test and train table using rbind() to obtain one data set
+
+2. Extract only measurements on mean and standard deviation
+meanStd_only is obtained by only selecting the column names that contain mean or std
+reducedSet is created by subsetting combined with only columns included in meanStd_only
+
+3. Uses descriptive activity names to name the activities in the data set instead of class
+Replace the labels (code for acticity) in reducedSet table with the proper name of the activity (second column of activites table)
+
+4. Appropriately labels the data set with descriptive variable names. 
+Labels column is remname activity
+All Acc have been replaced by Accelerometer
+All tBody have been replaced by TimeBody
+All Gyro have been replaced by Gyroscope
+All Mag have been replaced by Magnitude
+All character starting by f have been replaced by Frequency
+All character starting by t have been replaced by Time
+
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+Final_data is created by sumarizing reducedSet with the mean of each variable for each activity and each subject, after groupped by subject and activities
+Then Final_data has been exported as txt file
